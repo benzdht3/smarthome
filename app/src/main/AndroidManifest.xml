@@ -18,9 +18,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IoTDemo">
         <activity
-            android:name=".chart"
-            android:exported="true" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

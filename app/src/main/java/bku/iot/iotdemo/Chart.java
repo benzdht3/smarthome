@@ -1,6 +1,5 @@
 package bku.iot.iotdemo;
 
-import static bku.iot.iotdemo.MainActivity.getTempArr;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,8 +14,6 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-
-import java.util.List;
 
 public class Chart extends Fragment {
     MQTTHelper mqttHelper;
@@ -60,22 +57,6 @@ public class Chart extends Fragment {
         ligxAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         tempchart.invalidate();
         return view;
-    }
-    public static void getData(){
-        List<Float> temp = getTempArr();
-        LineData data= new LineData();
-        tempchart.setData(data);
-        /*if(temp.size()>0) {
-                data = new LineData();
-                for (int i = 0; i < temp.size(); i++) {
-                    data.addEntry(new Entry(i,temp.get(i)),0);
-                }
-                tempchart.setData(data);
-        }else{
-            Log.d("TEST","null");
-        }*/
-
-        //.d("TEST","getdata");
     }
 
     private LineDataSet createSet(){
