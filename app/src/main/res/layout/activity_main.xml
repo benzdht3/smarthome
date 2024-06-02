@@ -6,18 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
-    android:background="@drawable/bg">
-
-    <LinearLayout
+    android:background="@drawable/bg"
+    android:id="@+id/bg">
+    <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
-        android:layout_height="459dp"
-        android:gravity="center|bottom">
+        android:layout_height="wrap_content"
+        android:id="@+id/tab_layout"
+        android:visibility="gone">
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Real"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dash"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Noti"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Auto"/>
+    </com.google.android.material.tabs.TabLayout>
 
-        <Button
-            android:id="@+id/nextBtn"
-            android:layout_width="65dp"
-            android:layout_height="110dp"
-            android:text="go"
-            android:textSize="21dp" />
-    </LinearLayout>
+        <androidx.viewpager2.widget.ViewPager2
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/view_pager"
+            android:layout_below="@id/tab_layout"/>
 </LinearLayout>
