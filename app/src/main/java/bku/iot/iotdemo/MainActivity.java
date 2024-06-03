@@ -1,9 +1,8 @@
 package bku.iot.iotdemo;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,20 +18,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        boolean isLoggedin = sharedPreferences.getBoolean("isLoggedin", false);
+
+        if (!isLoggedin) {
+            // Redirect to LoginActivity
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_main);
         bg = findViewById(R.id.bg);
         tablayout = findViewById(R.id.tab_layout);
         viewpager2 = findViewById(R.id.view_pager);
         myViewPageAdapter = new MyViewPageAdapter(this);
         viewpager2.setAdapter(myViewPageAdapter);
-
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                bg.setBackground(null);
-                tablayout.setVisibility(View.VISIBLE);
-            }
-        }, 10000);
 
 
         tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

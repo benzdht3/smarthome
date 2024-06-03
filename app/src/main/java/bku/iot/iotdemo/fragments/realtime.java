@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,12 +47,6 @@ public class realtime extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_realtime, container, false);
         lay = view.findViewById(R.id.lay);
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                lay.setVisibility(View.VISIBLE);
-            }
-        }, 10000);
         txtTemp = view.findViewById(R.id.txtTemp);
         txtHumid = view.findViewById(R.id.txtHumid);
         txtLight = view.findViewById(R.id.txtLight);

@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.realtime"
     android:orientation="vertical"
-    android:id="@+id/lay"
-    android:visibility="gone">
+    android:id="@+id/lay">
 
     <LinearLayout
         android:layout_width="match_parent"
