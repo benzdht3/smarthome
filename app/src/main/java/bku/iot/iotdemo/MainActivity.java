@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 viewpager2.setCurrentItem(tab.getPosition());
                 int position = tab.getPosition();
-                if(position==1) {
+                if(position==1 || position == 2) {
                     myViewPageAdapter.refreshFragment(position);
                 }
             }

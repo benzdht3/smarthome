@@ -44,6 +44,7 @@ public class realtime extends Fragment {
     static List<String> humtime = new ArrayList<>();
     static List<Float> lig = new ArrayList<>();
     static List<String> ligtime = new ArrayList<>();
+    static List<notification.Notification> notilist = new ArrayList<>();
     boolean payload;
     boolean alert = true;
     public String gettimestamp(long timestamp){
@@ -134,6 +135,7 @@ public class realtime extends Fragment {
             return lig;
         }
         public static List<String> getLigTime () {return ligtime;}
+        public static List<notification.Notification> getNotilist (){return notilist;}
 
         public void checkAck (LabeledSwitch btn,boolean purpose){
             if (!ack) {
@@ -178,25 +180,40 @@ public class realtime extends Fragment {
                     Log.d("TEST", topic + " " + message.toString());
                     if (topic.contains("sensor1")) {
                         txtTemp.setText(message.toString() + "°C");
+                        int mea = Integer.parseInt(message.toString());
                         temp.add(Float.parseFloat(message.toString()));
                         temptime.add(gettimestamp(System.currentTimeMillis()));
-                        log += gettimestamp(System.currentTimeMillis()) + ": Temperature is changed to " + message.toString() + "°C" + "\n";
+                        String logtext = gettimestamp(System.currentTimeMillis()) + ": Temperature measured is " + message.toString() + "°C" ;
+                        log +=  logtext + "\n";
                         txtLog.setText(log);
+                        if(mea <= 20 || mea >= 50){
+                            notilist.add(new notification.Notification("Temperature Warning !!!",logtext));
+                        }
                     } else if (topic.contains("sensor3")) {
                         txtHumid.setText(message.toString() + "%");
+                        int mea = Integer.parseInt(message.toString());
                         hum.add(Float.parseFloat(message.toString()));
                         humtime.add(gettimestamp(System.currentTimeMillis()));
-                        log += gettimestamp(System.currentTimeMillis()) + ": Humidity is changed to " + message.toString() + "%" + "\n";
+                        String logtext = gettimestamp(System.currentTimeMillis()) + ": Humidity measured is " + message.toString() + "%";
+                        log += logtext + "\n";
                         txtLog.setText(log);
+                        if(mea <= 20 || mea >= 80){
+                            notilist.add(new notification.Notification("Humidity Warning !!!", logtext));
+                        }
                     } else if (topic.contains("sensor2")) {
                         txtLight.setText(message.toString() + "lux");
+                        int mea = Integer.parseInt(message.toString());
                         lig.add(Float.parseFloat(message.toString()));
                         ligtime.add(gettimestamp(System.currentTimeMillis()));
-                        log += gettimestamp(System.currentTimeMillis()) + ": Light is changed to " + message.toString() + "lux" + "\n";
+                        String logtext = gettimestamp(System.currentTimeMillis()) + ": Light measured is " + message.toString() + "lux";
+                        log += logtext + "\n";
                         txtLog.setText(log);
+                        if(mea <= 50 || mea >= 400){
+                            notilist.add(new notification.Notification("Light Level Warning !!!", logtext));
+                        }
                     } else if (topic.contains("motion")) {
                         txtLight.setText(message.toString() );
-                        log += gettimestamp(System.currentTimeMillis()) + ": Motion is changed to " + message.toString() + "\n";
+                        log += gettimestamp(System.currentTimeMillis()) + ": Motion is detected " + message.toString() + "\n";
                         txtLog.setText(log);
                     }  else if (topic.contains("Ack")) {
                         if (message.toString().equals("1")) {
