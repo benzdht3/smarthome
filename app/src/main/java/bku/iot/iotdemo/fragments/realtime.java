@@ -21,8 +21,11 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import bku.iot.iotdemo.MQTTHelper;
 import bku.iot.iotdemo.R;
@@ -36,11 +39,19 @@ public class realtime extends Fragment {
     Boolean ack = false;
     String btn;
     static List<Float> temp = new ArrayList<>();
+    static List<String> temptime = new ArrayList<>();
+    static List<Float> hum = new ArrayList<>();
+    static List<String> humtime = new ArrayList<>();
+    static List<Float> lig = new ArrayList<>();
+    static List<String> ligtime = new ArrayList<>();
     boolean payload;
     boolean alert = true;
     public String gettimestamp(long timestamp){
-        return String.valueOf(timestamp);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        return sdf.format(new Date(timestamp));
     }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -114,6 +125,15 @@ public class realtime extends Fragment {
         public static List<Float> getTempArr () {
             return temp;
         }
+        public static List<String> getTempTime () {return temptime;}
+        public static List<Float> getHumArr () {
+            return hum;
+        }
+        public static List<String> getHumTime () {return humtime;}
+        public static List<Float> getLigArr () {
+            return lig;
+        }
+        public static List<String> getLigTime () {return ligtime;}
 
         public void checkAck (LabeledSwitch btn,boolean purpose){
             if (!ack) {
@@ -159,14 +179,19 @@ public class realtime extends Fragment {
                     if (topic.contains("sensor1")) {
                         txtTemp.setText(message.toString() + "°C");
                         temp.add(Float.parseFloat(message.toString()));
+                        temptime.add(gettimestamp(System.currentTimeMillis()));
                         log += gettimestamp(System.currentTimeMillis()) + ": Temperature is changed to " + message.toString() + "°C" + "\n";
                         txtLog.setText(log);
                     } else if (topic.contains("sensor3")) {
                         txtHumid.setText(message.toString() + "%");
+                        hum.add(Float.parseFloat(message.toString()));
+                        humtime.add(gettimestamp(System.currentTimeMillis()));
                         log += gettimestamp(System.currentTimeMillis()) + ": Humidity is changed to " + message.toString() + "%" + "\n";
                         txtLog.setText(log);
                     } else if (topic.contains("sensor2")) {
                         txtLight.setText(message.toString() + "lux");
+                        lig.add(Float.parseFloat(message.toString()));
+                        ligtime.add(gettimestamp(System.currentTimeMillis()));
                         log += gettimestamp(System.currentTimeMillis()) + ": Light is changed to " + message.toString() + "lux" + "\n";
                         txtLog.setText(log);
                     } else if (topic.contains("motion")) {
@@ -195,9 +220,9 @@ public class realtime extends Fragment {
                             }else if (btn == "door") {
                                 btnFan.setOn(payload);
                                 if (payload) {
-                                    log += gettimestamp(System.currentTimeMillis()) + ": Door is locked\n";
+                                    log += gettimestamp(System.currentTimeMillis()) + ": Door is LOCKED\n";
                                 } else {
-                                    log += gettimestamp(System.currentTimeMillis()) + ": Fan is unlocked\n";
+                                    log += gettimestamp(System.currentTimeMillis()) + ": Fan is UNLOCKED\n";
                                 }
                                 txtLog.setText(log);
                             }

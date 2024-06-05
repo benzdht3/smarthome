@@ -9,53 +9,21 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
 public class Chart extends Fragment {
-    MQTTHelper mqttHelper;
     static LineChart tempchart,humidchart,lightchart;
     LineData t,h,l;
     LineDataSet tset;
-    static MainActivity main;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
-        tempchart=view.findViewById(R.id.tempchart);
-        humidchart=view.findViewById(R.id.humidchart);
-        lightchart=view.findViewById(R.id.lightchart);
 
-        Description tempdes= new Description();
-        tempdes.setText("Temperature History");
-        tempchart.setDescription(tempdes);
-        tempchart.getDescription().setEnabled(true);
-        XAxis tempxAxis = tempchart.getXAxis();
-        tempxAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        YAxis tempyAxis = tempchart.getAxisLeft();
-        tempyAxis.setAxisMinimum(15f);
-        tempyAxis.setAxisMaximum(60f);
-        tempyAxis.setAxisLineWidth(2f);
-        tempyAxis.setLabelCount(10);
-        tempyAxis.setGranularity(1f);
-
-        Description humdes= new Description();
-        humdes.setText("Humidity History");
-        humidchart.setDescription(humdes);
-        XAxis humxAxis = humidchart.getXAxis();
-        humxAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-
-        Description ligdes= new Description();
-        ligdes.setText("Light History");
-        lightchart.setDescription(ligdes);
-        XAxis ligxAxis = lightchart.getXAxis();
-        ligxAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        tempchart.invalidate();
         return view;
     }
 

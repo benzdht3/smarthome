@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tablayout;
     ViewPager2 viewpager2;
     MyViewPageAdapter myViewPageAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewpager2.setCurrentItem(tab.getPosition());
+                int position = tab.getPosition();
+                if(position==1) {
+                    myViewPageAdapter.refreshFragment(position);
+                }
             }
 
             @Override

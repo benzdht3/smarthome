@@ -7,31 +7,7 @@
     tools:context=".Chart"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="90"
-        android:orientation="vertical"
-        android:id="@+id/change">
-        <com.github.mikephil.charting.charts.LineChart
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="30"
-            android:id="@+id/tempchart">
-        </com.github.mikephil.charting.charts.LineChart>
-        <com.github.mikephil.charting.charts.LineChart
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="30"
-            android:id="@+id/humidchart">
-        </com.github.mikephil.charting.charts.LineChart>
-        <com.github.mikephil.charting.charts.LineChart
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="30"
-            android:id="@+id/lightchart">
-        </com.github.mikephil.charting.charts.LineChart>
-    </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
