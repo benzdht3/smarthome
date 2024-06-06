@@ -49,6 +49,12 @@ public class notification extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         List<Notification> notifications = getNotilist();
+        if(notifications.size()==0){
+            notifications.add(new Notification("No notification now",""));
+        }
+        if(notifications.size()>1 && notifications.get(0).title == "No notification now"){
+            notifications.remove(0);
+        }
         // Add more notifications here
 
         NotificationAdapter adapter = new NotificationAdapter(notifications);

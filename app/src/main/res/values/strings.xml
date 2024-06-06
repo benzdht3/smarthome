@@ -2,4 +2,7 @@
     <string name="app_name">SmartHome</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="select_device">Select Device</string>
+    <string name="select_on_off">Select On/Off</string>
+    <string name="select_time">Select Time</string>
 </resources>
