@@ -31,6 +31,10 @@ def processData(client,data):
         client.publish("button1", splitData[2])
     if splitData[1] == "P":
         client.publish("button2", splitData[2])
+    if splitData[1] == "D":
+        client.publish("door", splitData[2])
+    if splitData[1] == "M":
+        client.publish("motion", splitData[2])     
     
 
 mess = ""
