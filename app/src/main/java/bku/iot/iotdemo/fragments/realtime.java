@@ -3,6 +3,7 @@ package bku.iot.iotdemo.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -89,7 +90,7 @@ public class realtime extends Fragment {
             btnFan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    btn = "pump";
+                    btn = "fan";
                     if (btnFan.isOn()) {
                         sendDataMQTT("benzdht/feeds/button2", "0");
                         payload = false;
@@ -106,13 +107,13 @@ public class realtime extends Fragment {
         btnDoor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btn = "pump";
+                btn = "door";
                 if (btnDoor.isOn()) {
-                    sendDataMQTT("benzdht/feeds/button2", "0");
+                    sendDataMQTT("benzdht/feeds/door", "0");
                     payload = false;
                     checkAck(btnDoor, false);
                 } else {
-                    sendDataMQTT("benzdht/feeds/button2", "1");
+                    sendDataMQTT("benzdht/feeds/door", "1");
                     payload = true;
                     checkAck(btnDoor, true);
                 }
@@ -212,9 +213,18 @@ public class realtime extends Fragment {
                             notilist.add(new notification.Notification("Light Level Warning !!!", logtext));
                         }
                     } else if (topic.contains("motion")) {
-                        txtLight.setText(message.toString() );
-                        log += gettimestamp(System.currentTimeMillis()) + ": Motion is detected " + message.toString() + "\n";
-                        txtLog.setText(log);
+                        if (message.toString().equals("0")){
+                            txtMotion.setText("Motion");
+                            txtMotion.setBackgroundColor(Color.GRAY);
+                        }else{
+                            txtMotion.setText("Motion detected");
+                            txtMotion.setBackgroundColor(Color.RED);
+                            String logtext = gettimestamp(System.currentTimeMillis()) + ": Motion is detected";
+                            notilist.add(new notification.Notification("Motion detected !!!", logtext));
+                            log+= logtext + "\n";
+                            txtLog.setText(log);
+                        }
+
                     }  else if (topic.contains("Ack")) {
                         if (message.toString().equals("1")) {
                             alert = false;
@@ -235,11 +245,11 @@ public class realtime extends Fragment {
                                 }
                                 txtLog.setText(log);
                             }else if (btn == "door") {
-                                btnFan.setOn(payload);
+                                btnDoor.setOn(payload);
                                 if (payload) {
                                     log += gettimestamp(System.currentTimeMillis()) + ": Door is LOCKED\n";
                                 } else {
-                                    log += gettimestamp(System.currentTimeMillis()) + ": Fan is UNLOCKED\n";
+                                    log += gettimestamp(System.currentTimeMillis()) + ": Door is UNLOCKED\n";
                                 }
                                 txtLog.setText(log);
                             }

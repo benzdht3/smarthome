@@ -39,6 +39,7 @@ public class automation extends Fragment {
     private Map<String, List<String>> tasksMap = new HashMap<>();
     private String selectedTime;
     private int taskdate, taskmonth, taskyear;
+    static List<String> tasklist = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -120,8 +121,17 @@ public class automation extends Fragment {
         } else {
             tasks = new ArrayList<>();
         }
+        if(!tasks.isEmpty()){
+            for(int i=0;i<tasks.size();i++){
+                if(!tasklist.contains(tasks.get(i))){
+                    tasklist.add(tasks.get(i));
+                }
+            }
+        }
         adapter.clear();
         adapter.addAll(tasks);
         adapter.notifyDataSetChanged();
     }
+
+    public static List<String> getTask(){return tasklist;}
 }

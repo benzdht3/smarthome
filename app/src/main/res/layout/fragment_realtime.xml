@@ -84,6 +84,12 @@
             android:layout_height="0dp"
             android:layout_weight="20"
             android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Light bulb"
+                android:textSize="5sp">
+            </TextView>
             <com.github.angads25.toggle.widget.LabeledSwitch
                 android:id="@+id/btnBulb"
                 android:layout_width="match_parent"
@@ -93,8 +99,14 @@
                 android:textSize="14sp"
                 app:on="false"
                 app:colorBorder="#888"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fan"
+                android:textSize="5sp">
+            </TextView>
             <com.github.angads25.toggle.widget.LabeledSwitch
-                android:id="@+id/btnDoor"
+                android:id="@+id/btnFan"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="33"
@@ -102,8 +114,14 @@
                 android:textSize="14sp"
                 app:on="false"
                 app:colorBorder="#888"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Door"
+                android:textSize="5sp">
+            </TextView>
             <com.github.angads25.toggle.widget.LabeledSwitch
-                android:id="@+id/btnFan"
+                android:id="@+id/btnDoor"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="33"
